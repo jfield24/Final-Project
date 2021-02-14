@@ -1,0 +1,67 @@
+Round,player_0,player_1,prediction,probability
+Round of 16,Rublev A.,Ruud C.,0,0.8807542324066162
+Round of 16,Medvedev D.,McDonald M.,0,0.9815372228622437
+Round of 16,Tsitsipas S.,Berrettini M.,0,0.5740351974964142
+Round of 16,Nadal R.,Fognini F.,0,0.9568389058113098
+Quarter,Djokovic N.,Zverev A.,0,0.9726894199848175
+Quarter,Dimitrov G.,Karatsev A.,0,0.922793447971344
+Quarter,Rublev A.,McDonald M.,0,0.9751321375370026
+Quarter,Medvedev D.,Rublev A.,0,0.5878784656524658
+Quarter,Medvedev D.,Ruud C.,0,0.893348753452301
+Quarter,Ruud C.,McDonald M.,0,0.8887583613395691
+Quarter,Nadal R.,Tsitsipas S.,0,0.8728548288345337
+Quarter,Nadal R.,Berrettini M.,0,0.9090247750282288
+Quarter,Tsitsipas S.,Fognini F.,0,0.9514894187450409
+Quarter,Berrettini M.,Fognini F.,0,0.8693841993808746
+Semis,Djokovic N.,Dimitrov G.,0,0.8759583234786987
+Semis,Djokovic N.,Karatsev A.,0,0.9808966815471649
+Semis,Zverev A.,Dimitrov G.,0,0.6823188662528992
+Semis,Zverev A.,Karatsev A.,0,0.9558287858963013
+Semis,Nadal R.,Medvedev D.,0,0.9869459271430969
+Semis,Nadal R.,Rublev A.,0,0.8931620419025421
+Semis,Nadal R.,Ruud C.,0,0.9214178621768951
+Semis,Nadal R.,McDonald M.,0,0.988905668258667
+Semis,Medvedev D.,Tsitsipas S.,1,0.5904649496078491
+Semis,Medvedev D.,Berrettini M.,0,0.6725730299949646
+Semis,Medvedev D.,Fognini F.,0,0.8423815965652466
+Semis,Tsitsipas S.,Rublev A.,0,0.6606618165969849
+Semis,Tsitsipas S.,Ruud C.,0,0.8508160710334778
+Semis,Tsitsipas S.,McDonald M.,0,0.972379595041275
+Semis,Rublev A.,Berrettini M.,0,0.9128733575344086
+Semis,Rublev A.,Fognini F.,1,0.6209589838981628
+Semis,Berrettini M.,Ruud C.,0,0.9771856367588043
+Semis,Berrettini M.,McDonald M.,0,0.9636190235614777
+Semis,Fognini F.,Ruud C.,0,0.9094221591949463
+Semis,Fognini F.,McDonald M.,0,0.949798971414566
+Final,Djokovic N.,Nadal R.,0,0.9324169456958771
+Final,Djokovic N.,Medvedev D.,0,0.9348128736019135
+Final,Djokovic N.,Tsitsipas S.,0,0.9572134017944336
+Final,Djokovic N.,Rublev A.,0,0.8251741230487823
+Final,Djokovic N.,Berrettini M.,0,0.8589415848255157
+Final,Djokovic N.,Fognini F.,0,0.9855466485023499
+Final,Djokovic N.,Ruud C.,0,0.9585044980049133
+Final,Djokovic N.,McDonald M.,0,0.9915041029453278
+Final,Nadal R.,Zverev A.,0,0.8911423087120056
+Final,Nadal R.,Dimitrov G.,0,0.8236313164234161
+Final,Nadal R.,Karatsev A.,0,0.9751352667808533
+Final,Medvedev D.,Zverev A.,0,0.7964346706867218
+Final,Medvedev D.,Dimitrov G.,0,0.8673452734947205
+Final,Medvedev D.,Karatsev A.,0,0.9589998722076416
+Final,Tsitsipas S.,Zverev A.,1,0.5734308958053589
+Final,Tsitsipas S.,Dimitrov G.,1,0.5513567924499512
+Final,Tsitsipas S.,Karatsev A.,0,0.9393544793128967
+Final,Zverev A.,Rublev A.,0,0.685964971780777
+Final,Zverev A.,Berrettini M.,0,0.9450573623180389
+Final,Zverev A.,Fognini F.,0,0.9785984754562378
+Final,Zverev A.,Ruud C.,0,0.8740531206130981
+Final,Zverev A.,McDonald M.,0,0.9800730049610138
+Final,Rublev A.,Dimitrov G.,0,0.6342054307460785
+Final,Rublev A.,Karatsev A.,0,0.9452128112316132
+Final,Berrettini M.,Dimitrov G.,0,0.668041467666626
+Final,Berrettini M.,Karatsev A.,0,0.9209704399108887
+Final,Fognini F.,Dimitrov G.,1,0.6986728310585022
+Final,Fognini F.,Karatsev A.,0,0.8927522599697113
+Final,Dimitrov G.,Ruud C.,0,0.8963412642478943
+Final,Dimitrov G.,McDonald M.,0,0.9644963145256042
+Final,Ruud C.,Karatsev A.,0,0.7785229980945587
+Final,Karatsev A.,McDonald M.,0,0.6462793946266174
