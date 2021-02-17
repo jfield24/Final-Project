@@ -75,15 +75,11 @@ def subtract_no_days(date_string, num_days):
 
 # Function to calculate winning percentages over different stats
 
-def winning_percentage(player_id, data,  type1='matches', current_date=None, surface='All', last_n_weeks=0):
+def winning_percentage(player_id, data,  option='matches', current_date=None, surface='All', last_n_weeks=0):
     """
-    :param player_id: Name or ID of Player
-    :param data: The raw dataframe from http://www.tennis-data.co.uk/alldata.php
-    :param type1: Options: ['matches', 'total_matches', 'games', 'matches_5_sets', 'win_or_close_sets']
-    :param current_date: Date of match
-    :param surface: Surface options: ['All', 'Grass', 'Hard', 'Clay']
+    :param option: Options: ['matches', 'total_matches', 'games', 'matches_5_sets', 'win_or_close_sets']
     :param last_n_weeks: find stats from the past n weeks
-    :return: Returns the players Stat for the specified parameters.
+    :return: Returns the players stat for specified params.
     """
     data = data[data['Date'] < current_date]
 
@@ -94,46 +90,46 @@ def winning_percentage(player_id, data,  type1='matches', current_date=None, sur
         last_date = subtract_no_days(current_date, (last_n_weeks * 7))
         data = data[data['Date'] >= last_date]
 
-    if type1 == 'matches':
+    if option == 'matches':
         wins = (data['Winner'] == player_id).sum()
         loses = (data['Loser'] == player_id).sum()
 
-    elif type1 == 'total_matches':
+    elif option == 'total_matches':
         return (data['Winner'] == player_id).sum() + (data['Loser'] == player_id).sum()
 
 
-    elif type1 == 'matches_5_sets':
+    elif option == 'matches_5_sets':
         wins = ((data['Winner'] == player_id) & (data['best_of_5'] == 1)).sum()
         loses = ((data['Loser'] == player_id) & (data['best_of_5'] == 1)).sum()
 
 
-    elif type1 == 'games':
-        winner_set_list = ['W1', 'W2', 'W3', 'W4', 'W5']
-        loser_set_list = ['L1', 'L2', 'L3', 'L4', 'L5']
+    elif option == 'games':
+        winner_sets_list = ['W1', 'W2', 'W3', 'W4', 'W5']
+        loser_sets_list = ['L1', 'L2', 'L3', 'L4', 'L5']
 
-        wins = data[data['Winner'] == player_id][winner_set_list].values.sum() + data[data['Loser'] == player_id][loser_set_list].values.sum()
-        loses = data[data['Loser'] == player_id][winner_set_list].values.sum() + data[data['Winner'] == player_id][loser_set_list].values.sum()
+        wins = data[data['Winner'] == player_id][winner_sets_list].values.sum() + data[data['Loser'] == player_id][loser_sets_list].values.sum()
+        loses = data[data['Loser'] == player_id][winner_sets_list].values.sum() + data[data['Winner'] == player_id][loser_sets_list].values.sum()
 
 
-    elif type1 == 'win_or_close_sets':
+    elif option == 'win_or_close_sets':
 
         wins = 0
         loses = 0
 
-        data_3_set = data[data['best_of_5'] == 0]
-        data_5_set = data[data['best_of_5'] == 1]
+        data_3_sets = data[data['best_of_5'] == 0]
+        data_5_sets = data[data['best_of_5'] == 1]
 
         for i in range(1, 4):
-            wins = wins + ((data_3_set['Winner'] == player_id) & (data_3_set[('W' + str(i))] >= 5)).sum()
-            wins = wins + ((data_3_set['Loser'] == player_id) & (data_3_set[('L' + str(i))] >= 5)).sum()
-            loses = loses + ((data_3_set['Winner'] == player_id) & (data_3_set[('W' + str(i))] < 5)).sum()
-            loses = loses + ((data_3_set['Loser'] == player_id) & (data_3_set[('L' + str(i))] < 5)).sum()
+            wins = wins + ((data_3_sets['Winner'] == player_id) & (data_3_sets[('W' + str(i))] >= 5)).sum()
+            wins = wins + ((data_3_sets['Loser'] == player_id) & (data_3_sets[('L' + str(i))] >= 5)).sum()
+            loses = loses + ((data_3_sets['Winner'] == player_id) & (data_3_sets[('W' + str(i))] < 5)).sum()
+            loses = loses + ((data_3_sets['Loser'] == player_id) & (data_3_sets[('L' + str(i))] < 5)).sum()
 
         for i in range(1, 6):
-            wins = wins + ((data_5_set['Winner'] == player_id) & (data_5_set[('W' + str(i))] >= 5)).sum()
-            wins = wins + ((data_5_set['Loser'] == player_id) & (data_5_set[('L' + str(i))] >= 5)).sum()
-            loses = loses + ((data_5_set['Winner'] == player_id) & (data_5_set[('W' + str(i))] < 5)).sum()
-            loses = loses + ((data_5_set['Loser'] == player_id) & (data_5_set[('L' + str(i))] < 5)).sum()
+            wins = wins + ((data_5_sets['Winner'] == player_id) & (data_5_sets[('W' + str(i))] >= 5)).sum()
+            wins = wins + ((data_5_sets['Loser'] == player_id) & (data_5_sets[('L' + str(i))] >= 5)).sum()
+            loses = loses + ((data_5_sets['Winner'] == player_id) & (data_5_sets[('W' + str(i))] < 5)).sum()
+            loses = loses + ((data_5_sets['Loser'] == player_id) & (data_5_sets[('L' + str(i))] < 5)).sum()
 
     total = wins + loses
 
@@ -147,7 +143,7 @@ def winning_percentage(player_id, data,  type1='matches', current_date=None, sur
 
 # Function to return head to head stats between the two players
 
-def winning_percent_hh(player_name, opponent_name, data, type1='matches', current_date=None, surface='All', last_n_weeks=0):
+def winning_percent_h2h(player_name, opponent_name, data, option='matches', current_date=None, surface='All', last_n_weeks=0):
 
     data = data[data['Date'] < current_date]
 
@@ -158,19 +154,19 @@ def winning_percent_hh(player_name, opponent_name, data, type1='matches', curren
         last_date = subtract_no_days(current_date, (last_n_weeks * 7))
         data = data[data['Date'] >= last_date]
 
-    if type1 == 'matches':
+    if option == 'matches':
         wins = ((data['Winner'] == player_name) & (data['Loser'] == opponent_name)).sum()
         loses = ((data['Winner'] == opponent_name) & (data['Loser'] == player_name)).sum()
 
-    elif type1 == 'games':
-        winner_set_list = ['W1', 'W2', 'W3', 'W4', 'W5']
-        loser_set_list = ['L1', 'L2', 'L3', 'L4', 'L5']
+    elif option == 'games':
+        winner_sets_list = ['W1', 'W2', 'W3', 'W4', 'W5']
+        loser_sets_list = ['L1', 'L2', 'L3', 'L4', 'L5']
 
-        wins = data[(data['Winner'] == player_name) & (data['Loser'] == opponent_name)][winner_set_list].values.sum() + \
-               data[(data['Winner'] == opponent_name) & (data['Loser'] == player_name)][loser_set_list].values.sum()
+        wins = data[(data['Winner'] == player_name) & (data['Loser'] == opponent_name)][winner_sets_list].values.sum() + \
+               data[(data['Winner'] == opponent_name) & (data['Loser'] == player_name)][loser_sets_list].values.sum()
 
-        loses = data[(data['Winner'] == opponent_name) & (data['Loser'] == player_name)][winner_set_list].values.sum() + \
-                data[(data['Winner'] == player_name) & (data['Loser'] == opponent_name)][loser_set_list].values.sum()
+        loses = data[(data['Winner'] == opponent_name) & (data['Loser'] == player_name)][winner_sets_list].values.sum() + \
+                data[(data['Winner'] == player_name) & (data['Loser'] == opponent_name)][loser_sets_list].values.sum()
 
     total = wins + loses
 
@@ -181,237 +177,237 @@ def winning_percent_hh(player_name, opponent_name, data, type1='matches', curren
         win_percent = wins / total
     return win_percent
 
-# Function to create a data frame with player features for each match (in df_combined the player_1 will be the higher ranked player, df is the raw dataframe)
-def add_features(df_combined, df):
+# Function to create a data frame with player features for each match (in df_with_features the player_1 will be the higher ranked player, df is the raw dataframe)
+def add_features(df_with_features, df):
 
-    # **************************************
-    # Player Career Stats All Surface
-    # **************************************
-    print('Creating Player Career Stats All Surface')
+   
+    # Player Career Stats All Surfaces
+   
+    print('Loading Player Career Stats on All Surfaces')
 
-    df_combined.loc[:, 'player_1_match_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches', current_date=row['Date'], last_n_weeks=0),
+    df_with_features.loc[:, 'player_1_match_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches', current_date=row['Date'], last_n_weeks=0),
         axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches', current_date=row['Date'], last_n_weeks=0),
-        axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='games', current_date=row['Date'], last_n_weeks=0),
-        axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='games', current_date=row['Date'], last_n_weeks=0),
+    df_with_features.loc[:, 'player_2_match_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches', current_date=row['Date'], last_n_weeks=0),
         axis=1)
 
-    df_combined.loc[:, 'player_1_5_set_match_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_games_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='games', current_date=row['Date'], last_n_weeks=0),
+        axis=1)
+    df_with_features.loc[:, 'player_2_games_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='games', current_date=row['Date'], last_n_weeks=0),
+        axis=1)
+
+    df_with_features.loc[:, 'player_1_5_sets_match_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches_5_sets', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_5_set_match_win_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_5_sets_match_win_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches_5_sets', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
 
-    df_combined.loc[:, 'player_1_close_sets_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_close_sets_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='win_or_close_sets', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_close_sets_percent'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_close_sets_percent'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='win_or_close_sets', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
 
-    # **************************************
+   
     # Player Career Stats on Hard Court
-    # **************************************
+   
 
-    print('Creating Player Career Stats on Hard Court')
+    print('Loading Player Career Stats on Hard Courts')
 
-    df_combined.loc[:, 'player_1_match_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_match_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='games', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='games', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_match_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
 
-    df_combined.loc[:, 'player_1_5_set_match_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_games_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='games', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_5_set_match_win_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches_5_sets', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-
-    df_combined.loc[:, 'player_1_close_sets_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='win_or_close_sets', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_close_sets_percent_hard'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_games_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='games', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
 
-    # **************************************
+    df_with_features.loc[:, 'player_1_5_sets_match_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches_5_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
+    df_with_features.loc[:, 'player_2_5_sets_match_win_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches_5_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
+
+    df_with_features.loc[:, 'player_1_close_sets_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='win_or_close_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
+    df_with_features.loc[:, 'player_2_close_sets_percent_hard'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='win_or_close_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
+
+   
     # Player Career Stats All Surface Last 60 Weeks (chose more than a year as covid meant long shutdown)
-    # **************************************
+   
 
-    print('Creating Player Career Stats All Surface Last 60 Weeks')
+    print('Loading Player Career Stats on All Surfaces in the Last 60 Weeks')
 
-    df_combined.loc[:, 'player_1_match_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches', current_date=row['Date'], last_n_weeks=60),
+    df_with_features.loc[:, 'player_1_match_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches', current_date=row['Date'], last_n_weeks=60),
         axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches', current_date=row['Date'], last_n_weeks=60),
-        axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='games', current_date=row['Date'], last_n_weeks=60),
-        axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='games', current_date=row['Date'], last_n_weeks=60),
+    df_with_features.loc[:, 'player_2_match_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches', current_date=row['Date'], last_n_weeks=60),
         axis=1)
 
-    df_combined.loc[:, 'player_1_5_set_match_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_games_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='games', current_date=row['Date'], last_n_weeks=60),
+        axis=1)
+    df_with_features.loc[:, 'player_2_games_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='games', current_date=row['Date'], last_n_weeks=60),
+        axis=1)
+
+    df_with_features.loc[:, 'player_1_5_sets_match_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches_5_sets', current_date=row['Date'],
                                        last_n_weeks=60), axis=1)
-    df_combined.loc[:, 'player_2_5_set_match_win_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_5_sets_match_win_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches_5_sets', current_date=row['Date'],
                                        last_n_weeks=60), axis=1)
 
-    df_combined.loc[:, 'player_1_close_sets_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_close_sets_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='win_or_close_sets', current_date=row['Date'],
                                        last_n_weeks=60), axis=1)
-    df_combined.loc[:, 'player_2_close_sets_percent_60'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_close_sets_percent_60'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='win_or_close_sets', current_date=row['Date'],
                                        last_n_weeks=60), axis=1)
 
     
-    # **************************************
+   
     # Player Career Stats on Hard Court Last 100 Weeks (chose 100 as ATP rankings is on pause for 22 months ~96 weeks and rounded up to 100)
-    # **************************************
+   
 
-    print('Creating Player Career Stats on Hard Court Last 100 Weeks')
+    print('Loading Player Career Stats on Hard Court in the last 100 Weeks')
 
-    df_combined.loc[:, 'player_1_match_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_match_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=100), axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=100), axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='games', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=100), axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='games', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_match_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=100), axis=1)
 
-    df_combined.loc[:, 'player_1_5_set_match_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='matches_5_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_games_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='games', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=100), axis=1)
-    df_combined.loc[:, 'player_2_5_set_match_win_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='matches_5_sets', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=100), axis=1)
-
-    df_combined.loc[:, 'player_1_close_sets_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_1'], df, type1='win_or_close_sets', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=100), axis=1)
-    df_combined.loc[:, 'player_2_close_sets_percent_hard_100'] = df_combined.apply(
-        lambda row: winning_percentage(row['player_2'], df, type1='win_or_close_sets', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_games_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='games', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=100), axis=1)
 
-    # **************************************
+    df_with_features.loc[:, 'player_1_5_sets_match_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='matches_5_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=100), axis=1)
+    df_with_features.loc[:, 'player_2_5_sets_match_win_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='matches_5_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=100), axis=1)
+
+    df_with_features.loc[:, 'player_1_close_sets_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_1'], df, option='win_or_close_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=100), axis=1)
+    df_with_features.loc[:, 'player_2_close_sets_percent_hard_100'] = df_with_features.apply(
+        lambda row: winning_percentage(row['player_2'], df, option='win_or_close_sets', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=100), axis=1)
+
+   
     # Player Head to Head Career Stats All Surface
-    # **************************************
+   
 
-    print('Creating Player Head to Head Career Stats All Surface')
+    print('Loading Player H2H Career Stats on All Surfaces')
 
-    df_combined.loc[:, 'player_1_match_win_percent_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_1'], row['player_2'], df, type1='matches', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_match_win_percent_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_1'], row['player_2'], df, option='matches', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_2'], row['player_1'], df, type1='matches', current_date=row['Date'],
-                                       last_n_weeks=0), axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_1'], row['player_2'], df, type1='games', current_date=row['Date'],
-                                       last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_2'], row['player_1'], df, type1='games', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_match_win_percent_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_2'], row['player_1'], df, option='matches', current_date=row['Date'],
                                        last_n_weeks=0), axis=1)
 
-    # **************************************
+    df_with_features.loc[:, 'player_1_games_win_percent_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_1'], row['player_2'], df, option='games', current_date=row['Date'],
+                                       last_n_weeks=0), axis=1)
+    df_with_features.loc[:, 'player_2_games_win_percent_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_2'], row['player_1'], df, option='games', current_date=row['Date'],
+                                       last_n_weeks=0), axis=1)
+
+    
     # Player Head to Head Career Stats On Hard Court
-    # **************************************
+   
 
-    print('Creating Player Head to Head Career Stats On Hard Court')
+    print('Loading Player H2H Career Stats On Hard Court')
 
-    df_combined.loc[:, 'player_1_match_win_percent_hard_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_1'], row['player_2'], df, type1='matches', current_date=row['Date'],
+    df_with_features.loc[:, 'player_1_match_win_percent_hard_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_1'], row['player_2'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_match_win_percent_hard_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_2'], row['player_1'], df, type1='matches', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-
-    df_combined.loc[:, 'player_1_games_win_percent_hard_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_1'], row['player_2'], df, type1='games', current_date=row['Date'],
-                                       surface=row['Surface'], last_n_weeks=0), axis=1)
-    df_combined.loc[:, 'player_2_games_win_percent_hard_hh'] = df_combined.apply(
-        lambda row: winning_percent_hh(row['player_2'], row['player_1'], df, type1='games', current_date=row['Date'],
+    df_with_features.loc[:, 'player_2_match_win_percent_hard_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_2'], row['player_1'], df, option='matches', current_date=row['Date'],
                                        surface=row['Surface'], last_n_weeks=0), axis=1)
 
-    # **************************************
-    # Difference variables
-    # **************************************
+    df_with_features.loc[:, 'player_1_games_win_percent_hard_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_1'], row['player_2'], df, option='games', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
+    df_with_features.loc[:, 'player_2_games_win_percent_hard_h2h'] = df_with_features.apply(
+        lambda row: winning_percent_h2h(row['player_2'], row['player_1'], df, option='games', current_date=row['Date'],
+                                       surface=row['Surface'], last_n_weeks=0), axis=1)
 
-    print('Creating Difference Variables')
+   
+    # Difference between the players stats
+   
 
-    df_combined.loc[:, 'diff_match_win_percent'] = df_combined['player_1_match_win_percent'] - df_combined[
+    print('Loading variables for difference in player stats')
+
+    df_with_features.loc[:, 'diff_match_win_percent'] = df_with_features['player_1_match_win_percent'] - df_with_features[
         'player_2_match_win_percent']
-    df_combined.loc[:, 'diff_games_win_percent'] = df_combined['player_1_games_win_percent'] - df_combined[
+    df_with_features.loc[:, 'diff_games_win_percent'] = df_with_features['player_1_games_win_percent'] - df_with_features[
         'player_2_games_win_percent']
-    df_combined.loc[:, 'diff_5_set_match_win_percent'] = df_combined['player_1_5_set_match_win_percent'] - df_combined[
-        'player_2_5_set_match_win_percent']
-    df_combined.loc[:, 'diff_close_sets_percent'] = df_combined['player_1_close_sets_percent'] - df_combined[
+    df_with_features.loc[:, 'diff_5_sets_match_win_percent'] = df_with_features['player_1_5_sets_match_win_percent'] - df_with_features[
+        'player_2_5_sets_match_win_percent']
+    df_with_features.loc[:, 'diff_close_sets_percent'] = df_with_features['player_1_close_sets_percent'] - df_with_features[
         'player_2_close_sets_percent']
 
-    df_combined.loc[:, 'diff_match_win_percent_hard'] = df_combined['player_1_match_win_percent_hard'] - df_combined[
+    df_with_features.loc[:, 'diff_match_win_percent_hard'] = df_with_features['player_1_match_win_percent_hard'] - df_with_features[
         'player_2_match_win_percent_hard']
-    df_combined.loc[:, 'diff_games_win_percent_hard'] = df_combined['player_1_games_win_percent_hard'] - df_combined[
+    df_with_features.loc[:, 'diff_games_win_percent_hard'] = df_with_features['player_1_games_win_percent_hard'] - df_with_features[
         'player_2_games_win_percent_hard']
-    df_combined.loc[:, 'diff_5_set_match_win_percent_hard'] = df_combined['player_1_5_set_match_win_percent_hard'] - \
-                                                               df_combined['player_2_5_set_match_win_percent_hard']
-    df_combined.loc[:, 'diff_close_sets_percent_hard'] = df_combined['player_1_close_sets_percent_hard'] - \
-                                                          df_combined['player_2_close_sets_percent_hard']
+    df_with_features.loc[:, 'diff_5_sets_match_win_percent_hard'] = df_with_features['player_1_5_sets_match_win_percent_hard'] - \
+                                                               df_with_features['player_2_5_sets_match_win_percent_hard']
+    df_with_features.loc[:, 'diff_close_sets_percent_hard'] = df_with_features['player_1_close_sets_percent_hard'] - \
+                                                          df_with_features['player_2_close_sets_percent_hard']
 
-    df_combined.loc[:, 'diff_match_win_percent_60'] = df_combined['player_1_match_win_percent_60'] - \
-                                                            df_combined['player_2_match_win_percent_60']
-    df_combined.loc[:, 'diff_games_win_percent_60'] = df_combined['player_1_games_win_percent_60'] - \
-                                                            df_combined['player_2_games_win_percent_60']
-    df_combined.loc[:, 'diff_5_set_match_win_percent_60'] = df_combined['player_1_5_set_match_win_percent_60'] - \
-                                                            df_combined['player_2_5_set_match_win_percent_60']
-    df_combined.loc[:, 'diff_close_sets_percent_60'] = df_combined['player_1_close_sets_percent_60'] - df_combined[
+    df_with_features.loc[:, 'diff_match_win_percent_60'] = df_with_features['player_1_match_win_percent_60'] - \
+                                                            df_with_features['player_2_match_win_percent_60']
+    df_with_features.loc[:, 'diff_games_win_percent_60'] = df_with_features['player_1_games_win_percent_60'] - \
+                                                            df_with_features['player_2_games_win_percent_60']
+    df_with_features.loc[:, 'diff_5_sets_match_win_percent_60'] = df_with_features['player_1_5_sets_match_win_percent_60'] - \
+                                                            df_with_features['player_2_5_sets_match_win_percent_60']
+    df_with_features.loc[:, 'diff_close_sets_percent_60'] = df_with_features['player_1_close_sets_percent_60'] - df_with_features[
         'player_2_close_sets_percent_60']
 
-    df_combined.loc[:, 'diff_match_win_percent_hard_100'] = df_combined['player_1_match_win_percent_hard_100'] - \
-                                                            df_combined['player_2_match_win_percent_hard_100']
-    df_combined.loc[:, 'diff_games_win_percent_hard_100'] = df_combined['player_1_games_win_percent_hard_100'] - \
-                                                            df_combined['player_2_games_win_percent_hard_100']
-    df_combined.loc[:, 'diff_5_set_match_win_percent_hard_100'] = df_combined[
-                                                                      'player_1_5_set_match_win_percent_hard_100'] - \
-                                                                  df_combined[
-                                                                      'player_2_5_set_match_win_percent_hard_100']
-    df_combined.loc[:, 'diff_close_sets_percent_hard_100'] = df_combined['player_1_close_sets_percent_hard_100'] - \
-                                                             df_combined['player_2_close_sets_percent_hard_100']
+    df_with_features.loc[:, 'diff_match_win_percent_hard_100'] = df_with_features['player_1_match_win_percent_hard_100'] - \
+                                                            df_with_features['player_2_match_win_percent_hard_100']
+    df_with_features.loc[:, 'diff_games_win_percent_hard_100'] = df_with_features['player_1_games_win_percent_hard_100'] - \
+                                                            df_with_features['player_2_games_win_percent_hard_100']
+    df_with_features.loc[:, 'diff_5_sets_match_win_percent_hard_100'] = df_with_features[
+                                                                      'player_1_5_sets_match_win_percent_hard_100'] - \
+                                                                  df_with_features[
+                                                                      'player_2_5_sets_match_win_percent_hard_100']
+    df_with_features.loc[:, 'diff_close_sets_percent_hard_100'] = df_with_features['player_1_close_sets_percent_hard_100'] - \
+                                                             df_with_features['player_2_close_sets_percent_hard_100']
 
-    df_combined.loc[:, 'diff_match_win_percent_hh'] = df_combined['player_1_match_win_percent_hh'] - df_combined[
-        'player_2_match_win_percent_hh']
-    df_combined.loc[:, 'diff_games_win_percent_hh'] = df_combined['player_1_games_win_percent_hh'] - df_combined[
-        'player_2_games_win_percent_hh']
+    df_with_features.loc[:, 'diff_match_win_percent_h2h'] = df_with_features['player_1_match_win_percent_h2h'] - df_with_features[
+        'player_2_match_win_percent_h2h']
+    df_with_features.loc[:, 'diff_games_win_percent_h2h'] = df_with_features['player_1_games_win_percent_h2h'] - df_with_features[
+        'player_2_games_win_percent_h2h']
 
-    df_combined.loc[:, 'diff_match_win_percent_hard_hh'] = df_combined['player_1_match_win_percent_hard_hh'] - \
-                                                            df_combined['player_2_match_win_percent_hard_hh']
-    df_combined.loc[:, 'diff_games_win_percent_hard_hh'] = df_combined['player_1_games_win_percent_hard_hh'] - \
-                                                            df_combined['player_2_games_win_percent_hard_hh']
+    df_with_features.loc[:, 'diff_match_win_percent_hard_h2h'] = df_with_features['player_1_match_win_percent_hard_h2h'] - \
+                                                            df_with_features['player_2_match_win_percent_hard_h2h']
+    df_with_features.loc[:, 'diff_games_win_percent_hard_h2h'] = df_with_features['player_1_games_win_percent_hard_h2h'] - \
+                                                            df_with_features['player_2_games_win_percent_hard_h2h']
 
-    return df_combined
+    return df_with_features
