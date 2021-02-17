@@ -23,58 +23,75 @@
     <div class="menu">
 
     <a class="button" href="index.html"style="text-decoration:none">HOME</a>
-    <a class="button" href=""style="text-decoration:none;">HOW IT WORKS</a>
+    <a class="button" href="how_it_works.html"style="text-decoration:none;">HOW IT WORKS</a>
     <a class="button" href=""style="text-decoration:none;">PREDICTOR</a>
     <a class="button" href="index.html"style="text-decoration:none;">RESULTS</a>
 </div>
 
-
-</div><!--L1 main box ends-->
-
-<br>
 <br>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-md-center">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Choose a Match to Show Prediction
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button" id="1" onclick="myfunction()">Novak Djokovic v Alexander Zverev</button>
-          <button class="dropdown-item" type="button" id="2" onclick="myfunction()">Grigor Dimitrov v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="3" onclick="myfunction()">Daniil Medvedev v Andrey Rublev</button>
-          <button class="dropdown-item" type="button" id="4" onclick="myfunction()">Rafael Nadal v Stefanos Tsitsipas</button>
-          <button class="dropdown-item" type="button" id="5" onclick="myfunction()">Novak Djokovic v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="6" onclick="myfunction()">Novak Djokovic v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="7" onclick="myfunction()">Alexander Zverev v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="8" onclick="myfunction()">Alexander Zverev v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="9" onclick="myfunction()">Rafael Nadal v Daniil Medvedev</button>
-          <button class="dropdown-item" type="button" id="10" onclick="myfunction()">Rafael Nadal v Andrey Rublev</button>
-          <button class="dropdown-item" type="button" id="11" onclick="myfunction()">Daniil Medvedev v Stefanos Tsitsipas</button>
-          <button class="dropdown-item" type="button" id="12" onclick="myfunction()">Stefanos Tsitsipas v Andrey Rublev</button>
-          <button class="dropdown-item" type="button" id="13" onclick="myfunction()">Novak Djokovic v Rafael Nadal</button>
-          <button class="dropdown-item" type="button" id="14" onclick="myfunction()">Novak Djokovic v Daniil Medvedev</button>
-          <button class="dropdown-item" type="button" id="15" onclick="myfunction()">Novak Djokovic v Stefanos Tsitsipas</button>
-          <button class="dropdown-item" type="button" id="16" onclick="myfunction()">Novak Djokovic v Andrey Rublev</button>
-          <button class="dropdown-item" type="button" id="17" onclick="myfunction()">Rafael Nadal v Alexander Zverev</button>
-          <button class="dropdown-item" type="button" id="18" onclick="myfunction()">Rafael Nadal v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="19" onclick="myfunction()">Rafael Nadal v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="20" onclick="myfunction()">Daniil Medvedev v Alexander Zverev</button>
-          <button class="dropdown-item" type="button" id="21" onclick="myfunction()">Daniil Medvedev v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="22" onclick="myfunction()">Daniil Medvedev v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="23" onclick="myfunction()">Stefanos Tsitsipas v Alexander Zverev</button>
-          <button class="dropdown-item" type="button" id="24" onclick="myfunction()">Stefanos Tsitsipas v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="25" onclick="myfunction()">Stefanos Tsitsipas v Aslan Karatsev</button>
-          <button class="dropdown-item" type="button" id="26" onclick="myfunction()">Alexander Zverev v Andrey Rublev</button>
-          <button class="dropdown-item" type="button" id="27" onclick="myfunction()">Andrey Rublev v Grigor Dimitrov</button>
-          <button class="dropdown-item" type="button" id="28" onclick="myfunction()">Andrey Rublev v Aslan Karatsev</button>
+          <h6 class="dropdown-header">Quarter Finals</h6>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" onclick="changeFunction1()">Novak Djokovic v Alexander Zverev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction2()">Grigor Dimitrov v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction3()">Daniil Medvedev v Andrey Rublev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction4()">Rafael Nadal v Stefanos Tsitsipas</button>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Semi Finals</h6>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" onclick="changeFunction5()">Novak Djokovic v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction6()">Novak Djokovic v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction7()">Alexander Zverev v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction8()">Alexander Zverev v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction9()">Rafael Nadal v Daniil Medvedev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction10()">Rafael Nadal v Andrey Rublev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction11()">Daniil Medvedev v Stefanos Tsitsipas</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction12()">Stefanos Tsitsipas v Andrey Rublev</button>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Finals</h6>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" type="button" onclick="changeFunction13()">Novak Djokovic v Rafael Nadal</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction14()">Novak Djokovic v Daniil Medvedev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction15()">Novak Djokovic v Stefanos Tsitsipas</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction16()">Novak Djokovic v Andrey Rublev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction17()">Rafael Nadal v Alexander Zverev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction18()">Rafael Nadal v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction19()">Rafael Nadal v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction20()">Daniil Medvedev v Alexander Zverev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction21()">Daniil Medvedev v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction22()">Daniil Medvedev v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction23()">Stefanos Tsitsipas v Alexander Zverev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction24()">Stefanos Tsitsipas v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction25()">Stefanos Tsitsipas v Aslan Karatsev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction26()">Alexander Zverev v Andrey Rublev</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction27()">Andrey Rublev v Grigor Dimitrov</button>
+          <button class="dropdown-item" type="button" onclick="changeFunction28()">Andrey Rublev v Aslan Karatsev</button>
         </div>
       </div>
     </div>
+    
+  </div>
+<br>
+<br>
+<br>
+
+  <div>
+    <p id="one"></p>
+    <p id="two"></p>
+    <p id="three"></p>
+    <br>
+    <p id="four"></p>
+    <p id="five"></p>
+    <p id="six"></p>
   </div>
 
-
-
+</div><!--L1 main box ends-->
 
 <div class="footer">
   <div class="footer-col">Copyright © 2021 Australian Open. All Rights Reserved.</div>

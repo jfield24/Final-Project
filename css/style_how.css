@@ -17,7 +17,7 @@ font-family: 'Open Sans', sans-serif;font-size:16px;font-weight:bold;color:#2744
 .hero2 img {width:100%; height:700px;}
 .info {width:80%;height:200px;display: flex;justify-content:center; align-items: center;margin-top: 30px;
   font-family: 'Open Sans', sans-serif;font-size:10px;color:#ffffff;text-align: center;}
-.info h1 {width:80%%;height:auto;
+.info h1 {width:80%;height:auto;
 font-weight:lighter;text-align: center;line-height: 1.4;text-align: center;}
 .footer{width:auto;height:70px;background:#1e8fd5;}
 .footer-col{width:auto;height:70px;

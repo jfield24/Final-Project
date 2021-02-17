@@ -37,7 +37,7 @@ font-family: 'Open Sans', sans-serif;font-size:10px;color:#ffffff;padding-top: -
 .more h1 {width:10%;height:auto;
 display:flex; justify-content:center;align-items:center;;
 border:2px solid #ffffff;margin-top:-100px;font-weight: normal;}
-.more h1:hover{;transition:0.5s;transform: scale(1.1)}
+.more h1:hover{transition:0.5s;transform: scale(1.1)}
 
 
 .footer{width:100%;height:70px;background:#1e8fd5;}
