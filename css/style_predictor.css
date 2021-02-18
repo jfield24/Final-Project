@@ -1,11 +1,11 @@
 @charset "UTF-8";
 /*CSS docment*/
 body{margin:0}
-.main{width:1440px;height:1470px;background:#377db8;margin:auto}
+.main{width:100%;height:1050px;background:#377db8;margin:auto}
 .header{width:100%;height:100px;background:#1e8fd5;display:flex;justify-content:flex-start; align-items:center;}
 .logo{width:50%;height:auto;
 display:flex;justify-content:flex-start; align-items:flex-start;}
-.logo img{width:18%;height:auto;justify-content:flex-start; align-items:flex-start;padding-left: 50px;}
+.logo img{width:20%;height:auto;justify-content:flex-start; align-items:flex-start;padding-left: 50px;}
 
 .menu{width:100%;height:50px;background:#2ebdbd;display:flex}
 .button{width:25%;height:50px;background:#e8f7ff;
