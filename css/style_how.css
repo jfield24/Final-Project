@@ -29,6 +29,6 @@ font-weight:lighter;text-align: center;line-height: 1.4;margin-left: auto;}
 
 
 .footer{width:auto;height:70px;background:#1e8fd5;}
-.footer-col{width:auto;height:70px;
+.footer-col{height:70px;
 font-family: 'Open Sans', sans-serif;font-size:12px;font-weight:400;color:#ffffff;
 display:flex;justify-content: center;align-items: center;}
