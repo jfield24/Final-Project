@@ -3,7 +3,7 @@
 ---
 
 ## Project Description
-The purpose of this project was to create a Machine Learning model to predict the outcomes and probabilties of the remaining possible Australian Open matches (some quarter finals and the possible semi-finals and final matches were predicted. Data from 2011-2021 was used in training the model.
+The purpose of this project was to create a Machine Learning model to predict the outcomes and probabilties of the remaining possible Australian Open matches (some quarter finals and the possible semi-finals and final matches were predicted. Data from 2011-2021 was used in training the model. 
 
 ---
 
@@ -25,6 +25,13 @@ Javascript
 
 Pandas Scraping
 
+---
+
+## Website Screenshots
+
+![index](https://raw.githubusercontent.com/jfield24/Final-Project/main/screenshots/index.JPG)
+
+![output](https://raw.githubusercontent.com/jfield24/Final-Project/main/screenshots/Output.JPG)
 
 ---
 
